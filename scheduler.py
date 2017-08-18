@@ -203,7 +203,7 @@ class Scheduler():
 			return False
 
 	# determines all possible start times for a specified scene
-	def return_times_for_scene(self, scene):
+	def return_times_for_scene(self, scene, days=[]):
 		# return all times that a particular scene can start
 		# outputs strings in the form "Day at Time"
 
@@ -214,9 +214,11 @@ class Scheduler():
 		#		does scene fit? if so, add it to list
 		# return final list
 
+		if not days: # days can be specified, default is search all
+			days = self.calendar.day_time_chart.keys()
+
 		working_times = []
 
-		days = self.calendar.day_time_chart.keys()
 		for day in days:
 			times = self.calendar.day_time_chart[day]
 			for time in times:
@@ -418,3 +420,5 @@ print(myScheduler.schedule(days, list_of_scenes))
 # Other things that can be done:
 #	Print out times that a scene can be done
 #	Print out scenes that fit into a particular timeblock
+
+print(myScheduler.return_times_for_scene("Scene 1",["Day 1", "Day 2", "Day 3"]))
